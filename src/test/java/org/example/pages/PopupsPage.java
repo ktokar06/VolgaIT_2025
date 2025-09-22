@@ -8,8 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Класс Page Object для работы со страницей всплывающих окон (попапов, алертов, тултипов)
- * Наследует функциональность от базового класса BasePage
+ * Класс Page Object для работы со страницей всплывающих окон
  */
 public class PopupsPage extends BasePage {
 
@@ -21,11 +20,6 @@ public class PopupsPage extends BasePage {
     @FindBy(css = ".tooltip_text") private WebElement tooltip;
     @FindBy(xpath = "//div[contains(text(), 'click me to see a tooltip')]") private WebElement tooltipTrigger;
 
-    /**
-     * Конструктор класса PopupsPage
-     *
-     * @param driver экземпляр WebDriver для управления браузером
-     */
     public PopupsPage(WebDriver driver) {
         super(driver);
     }
@@ -33,7 +27,7 @@ public class PopupsPage extends BasePage {
     /**
      * Клик по кнопке вызова алерта
      *
-     * @return текущий экземпляр PopupsPage для поддержки цепочки вызовов
+     * @return текущий экземпляр PopupsPage
      */
     @Step("Клик по кнопке Alert")
     public PopupsPage clickAlertButton() {
@@ -44,7 +38,7 @@ public class PopupsPage extends BasePage {
     /**
      * Клик по кнопке вызова confirm-диалога
      *
-     * @return текущий экземпляр PopupsPage для поддержки цепочки вызовов
+     * @return текущий экземпляр PopupsPage
      */
     @Step("Клик по кнопке Confirm")
     public PopupsPage clickConfirmButton() {
@@ -55,7 +49,7 @@ public class PopupsPage extends BasePage {
     /**
      * Клик по кнопке вызова prompt-диалога
      *
-     * @return текущий экземпляр PopupsPage для поддержки цепочки вызовов
+     * @return текущий экземпляр PopupsPage
      */
     @Step("Клик по кнопке Prompt")
     public PopupsPage clickPromptButton() {
@@ -66,7 +60,7 @@ public class PopupsPage extends BasePage {
     /**
      * Клик по элементу-триггеру для отображения тултипа
      *
-     * @return текущий экземпляр PopupsPage для поддержки цепочки вызовов
+     * @return текущий экземпляр PopupsPage
      */
     @Step("Клик по тултипу")
     public PopupsPage clickTooltip() {
@@ -78,7 +72,7 @@ public class PopupsPage extends BasePage {
      * Обработка алерта с возможностью принятия или отклонения
      *
      * @param accept true - принять алерт (OK), false - отклонить (Cancel)
-     * @return текущий экземпляр PopupsPage для поддержки цепочки вызовов
+     * @return текущий экземпляр PopupsPage
      */
     @Step("Обработка алерта")
     public PopupsPage handleAlert(boolean accept) {
@@ -98,7 +92,7 @@ public class PopupsPage extends BasePage {
      *
      * @param text текст для ввода в prompt (может быть null)
      * @param accept true - принять (OK), false - отклонить (Cancel)
-     * @return текущий экземпляр PopupsPage для поддержки цепочки вызовов
+     * @return текущий экземпляр PopupsPage
      */
     @Step("Обработка промпта с текстом: {text}")
     public PopupsPage handlePrompt(String text, boolean accept) {
