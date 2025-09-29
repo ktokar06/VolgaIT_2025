@@ -2,9 +2,9 @@ package org.example.tests;
 
 import io.qameta.allure.*;
 import org.example.pages.FormFieldsPage;
+import org.example.helpers.ParameterProvider;
 import org.testng.annotations.Test;
 
-import static org.example.config.Config.FORM_FIELDS_URL;
 import static org.testng.Assert.assertTrue;
 
 @Epic("Автоматизация веб-форм")
@@ -16,15 +16,15 @@ public class FormFieldsTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Тест проверяет успешное заполнение формы и появление алерта 'Message received!'")
     public void testFillAndSubmitForm() {
-        driver.get(FORM_FIELDS_URL);
+        driver.get(ParameterProvider.get("form.fields.url"));
         FormFieldsPage formPage = new FormFieldsPage(driver);
 
-        formPage.fillName("Иван Иванов")
-                .fillPassword("securePassword123")
+        formPage.fillName(ParameterProvider.get("test.name"))
+                .fillPassword(ParameterProvider.get("test.password"))
                 .selectDrinks("Milk", "Coffee")
                 .selectYellowColor()
                 .selectAutomation("Yes")
-                .fillEmail("test@example.com")
+                .fillEmail(ParameterProvider.get("test.email"))
                 .fillMessageWithToolsInfo()
                 .clickSubmit();
 

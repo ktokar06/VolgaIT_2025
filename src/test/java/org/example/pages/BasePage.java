@@ -4,16 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 /**
- * Базовый класс для всех страниц приложения.
- * Содержит WebDriver и WebDriverWait, инициализирует элементы страницы с помощью PageFactory.
+ * Абстрактный базовый класс для всех страниц веб-приложения.
  */
-public class BasePage {
+public abstract class BasePage {
     protected WebDriver driver;
 
     /**
-     * Конструктор базовой страницы.
+     * Конструктор базового класса страницы.
+     * Инициализирует WebDriver и элементы PageFactory.
      *
-     * @param driver WebDriver, используемый для взаимодействия с браузером
+     * @param driver экземпляр WebDriver для управления браузером
+     * @throws IllegalArgumentException если передан null WebDriver
      */
     public BasePage(WebDriver driver) {
         this.driver = driver;

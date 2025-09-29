@@ -78,10 +78,15 @@ public class PopupsPage extends BasePage {
     public PopupsPage handleAlert(boolean accept) {
         if (WaitUtils.waitForAlertPresence(driver, 5)) {
             Alert alert = driver.switchTo().alert();
-            if (accept) {
-                alert.accept();
-            } else {
-                alert.dismiss();
+            switch (String.valueOf(accept)) {
+                case "true":
+                    alert.accept();
+                    break;
+                case "false":
+                    alert.dismiss();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Недопустимое значение accept: " + accept);
             }
         }
         return this;
@@ -101,10 +106,16 @@ public class PopupsPage extends BasePage {
             if (text != null) {
                 alert.sendKeys(text);
             }
-            if (accept) {
-                alert.accept();
-            } else {
-                alert.dismiss();
+
+            switch (String.valueOf(accept)) {
+                case "true":
+                    alert.accept();
+                    break;
+                case "false":
+                    alert.dismiss();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Недопустимое значение accept: " + accept);
             }
         }
         return this;

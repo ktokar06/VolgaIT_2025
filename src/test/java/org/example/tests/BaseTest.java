@@ -10,10 +10,9 @@ import org.testng.annotations.*;
 import java.time.Duration;
 
 /**
- * Базовый класс для всех тестов, содержащий общие настройки и методы.
+ * Абстрактный базовый класс для всех тестов.
  */
-public class BaseTest {
-
+public abstract class BaseTest {
     protected WebDriver driver;
 
     /**

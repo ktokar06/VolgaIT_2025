@@ -2,9 +2,9 @@ package org.example.tests;
 
 import io.qameta.allure.*;
 import org.example.pages.ClickEventsPage;
+import org.example.helpers.ParameterProvider;
 import org.testng.annotations.Test;
 
-import static org.example.config.Config.CLICK_EVENTS_URL;
 import static org.testng.Assert.assertTrue;
 
 @Epic("Автоматизация событий клика")
@@ -16,7 +16,7 @@ public class ClickEventsTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Тест проверяет корректность сообщений после кликов на кнопки различных животных")
     void testAnimalButtonClicks() {
-        driver.get(CLICK_EVENTS_URL);
+        driver.get(ParameterProvider.get("click.events.url"));
         ClickEventsPage clickEventsPage = new ClickEventsPage(driver);
 
         clickEventsPage.clickCat();
