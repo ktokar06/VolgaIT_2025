@@ -2,7 +2,7 @@ package org.example.tests;
 
 import io.qameta.allure.*;
 import org.example.pages.ClickEventsPage;
-import org.example.helpers.ParameterProvider;
+import org.example.utils.ParameterProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
@@ -13,7 +13,6 @@ public class ClickEventsTest extends BaseTest {
 
     @Test
     @Story("Клики по кнопкам животных")
-    @Severity(SeverityLevel.CRITICAL)
     @Description("Тест проверяет корректность сообщений после кликов на кнопки различных животных")
     void testAnimalButtonClicks() {
         driver.get(ParameterProvider.get("click.events.url"));

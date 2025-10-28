@@ -12,13 +12,26 @@ import org.openqa.selenium.support.FindBy;
  */
 public class PopupsPage extends BasePage {
 
-    @FindBy(id = "alert") private WebElement alertButton;
-    @FindBy(id = "confirm") private WebElement confirmButton;
-    @FindBy(id = "prompt") private WebElement promptButton;
-    @FindBy(id = "confirmResult") private WebElement confirmResult;
-    @FindBy(id = "promptResult") private WebElement promptResult;
-    @FindBy(css = ".tooltip_text") private WebElement tooltip;
-    @FindBy(xpath = "//div[contains(text(), 'click me to see a tooltip')]") private WebElement tooltipTrigger;
+    @FindBy(id = "alert")
+    private WebElement alertButton;
+
+    @FindBy(id = "confirm")
+    private WebElement confirmButton;
+
+    @FindBy(id = "prompt")
+    private WebElement promptButton;
+
+    @FindBy(id = "confirmResult")
+    private WebElement confirmResult;
+
+    @FindBy(id = "promptResult")
+    private WebElement promptResult;
+
+    @FindBy(css = ".tooltip_text")
+    private WebElement tooltip;
+
+    @FindBy(xpath = "//div[contains(text(), 'click me to see a tooltip')]")
+    private WebElement tooltipTrigger;
 
     public PopupsPage(WebDriver driver) {
         super(driver);
@@ -95,7 +108,7 @@ public class PopupsPage extends BasePage {
     /**
      * Обработка prompt-диалога с вводом текста и выбором действия
      *
-     * @param text текст для ввода в prompt (может быть null)
+     * @param text   текст для ввода в prompt (может быть null)
      * @param accept true - принять (OK), false - отклонить (Cancel)
      * @return текущий экземпляр PopupsPage
      */

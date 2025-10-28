@@ -18,16 +18,35 @@ import java.util.List;
  */
 public class FormFieldsPage extends BasePage {
 
-    @FindBy(id = "name-input") private WebElement nameField;
-    @FindBy(id = "email") private WebElement emailField;
-    @FindBy(id = "message") private WebElement messageField;
-    @FindBy(id = "submit-btn") private WebElement submitButton;
-    @FindBy(xpath = "//input[@type='password']") private WebElement passwordField;
-    @FindBy(css = "ul li")  private List<WebElement> automationToolsList;
-    @FindBy(css = "#drink2") private WebElement milkCheckbox;
-    @FindBy(css = "#drink3") private WebElement coffeeCheckbox;
-    @FindBy(css = "#color3") private WebElement yellowRadioButton;
-    @FindBy(css = "select[name='automation']") private WebElement automationDropdown;
+    @FindBy(id = "name-input")
+    private WebElement nameField;
+
+    @FindBy(id = "email")
+    private WebElement emailField;
+
+    @FindBy(id = "message")
+    private WebElement messageField;
+
+    @FindBy(id = "submit-btn")
+    private WebElement submitButton;
+
+    @FindBy(xpath = "//input[@type='password']")
+    private WebElement passwordField;
+
+    @FindBy(css = "ul li")
+    private List<WebElement> automationToolsList;
+
+    @FindBy(css = "#drink2")
+    private WebElement milkCheckbox;
+
+    @FindBy(css = "#drink3")
+    private WebElement coffeeCheckbox;
+
+    @FindBy(css = "#color3")
+    private WebElement yellowRadioButton;
+
+    @FindBy(css = "select[name='automation']")
+    private WebElement automationDropdown;
 
     public FormFieldsPage(WebDriver driver) {
         super(driver);

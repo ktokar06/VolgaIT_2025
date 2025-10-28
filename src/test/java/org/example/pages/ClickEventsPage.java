@@ -1,10 +1,10 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
 import org.example.utils.WaitUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import io.qameta.allure.Step;
 
 /**
  * Класс страницы для работы с событиями кликов.
@@ -12,11 +12,20 @@ import io.qameta.allure.Step;
  */
 public class ClickEventsPage extends BasePage {
 
-    @FindBy(xpath = "//button[contains(., 'Cat')]") private WebElement catButton;
-    @FindBy(xpath = "//button[contains(., 'Dog')]") private WebElement dogButton;
-    @FindBy(xpath = "//button[contains(., 'Pig')]") private WebElement pigButton;
-    @FindBy(xpath = "//button[contains(., 'Cow')]") private WebElement cowButton;
-    @FindBy(id = "demo") private WebElement demoTextElement;
+    @FindBy(xpath = "//button[contains(., 'Cat')]")
+    private WebElement catButton;
+
+    @FindBy(xpath = "//button[contains(., 'Dog')]")
+    private WebElement dogButton;
+
+    @FindBy(xpath = "//button[contains(., 'Pig')]")
+    private WebElement pigButton;
+
+    @FindBy(xpath = "//button[contains(., 'Cow')]")
+    private WebElement cowButton;
+
+    @FindBy(id = "demo")
+    private WebElement demoTextElement;
 
     public ClickEventsPage(WebDriver driver) {
         super(driver);

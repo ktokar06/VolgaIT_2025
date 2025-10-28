@@ -2,7 +2,7 @@ package org.example.tests;
 
 import io.qameta.allure.*;
 import org.example.pages.FormFieldsPage;
-import org.example.helpers.ParameterProvider;
+import org.example.utils.ParameterProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;

@@ -1,4 +1,4 @@
-package org.example.helpers;
+package org.example.utils;
 
 import java.io.InputStream;
 import java.util.HashMap;
