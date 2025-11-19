@@ -1,7 +1,6 @@
 package org.example.utils;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,29 +13,28 @@ import java.util.List;
 public final class WaitUtils {
 
     /**
-     * Ожидает появления алерта на странице с заданным таймаутом.
+     * Ожидает появления алерта на странице в течение указанного времени.
+     * Возвращает объект Alert для дальнейшего взаимодействия.
      *
-     * @param driver  Веб-драйвер, используемый для управления браузером.
-     * @param timeout Таймаут ожидания в секундах.
-     * @return {@code true}, если алерт появился, иначе {@code false}.
+     * @param driver  экземпляр WebDriver для управления браузером
+     * @param timeout время ожидания в секундах
+     * @return объект Alert для взаимодействия с диалоговым окном
+     * @throws TimeoutException если алерт не появился в течение заданного времени
      */
-    public static boolean waitForAlertPresence(WebDriver driver, int timeout) {
+    public static Alert waitForAlertPresent(WebDriver driver, int timeout) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
-        try {
-            wait.until(ExpectedConditions.alertIsPresent());
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return wait.until(ExpectedConditions.alertIsPresent());
     }
 
     /**
-     * Ожидает видимости элемента на странице.
+     * Ожидает видимости элемента на странице в течение указанного времени.
+     * Элемент считается видимым, когда он отображается и имеет ненулевой размер.
      *
-     * @param driver  Веб-драйвер, используемый для управления браузером.
-     * @param element Элемент, которого нужно ожидать.
-     * @param timeout Таймаут ожидания в секундах.
-     * @return Видимый элемент.
+     * @param driver  экземпляр WebDriver для управления браузером
+     * @param element веб-элемент, видимость которого нужно ожидать
+     * @param timeout время ожидания в секундах
+     * @return видимый веб-элемент
+     * @throws TimeoutException если элемент не стал видимым в течение заданного времени
      */
     public static WebElement waitForElementVisible(WebDriver driver, WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
@@ -44,12 +42,14 @@ public final class WaitUtils {
     }
 
     /**
-     * Ожидает кликабельности элемента на странице.
+     * Ожидает кликабельности элемента на странице в течение указанного времени.
+     * Элемент считается кликабельным, когда он видим и включен.
      *
-     * @param driver  Веб-драйвер, используемый для управления браузером.
-     * @param element Элемент, которого нужно ожидать.
-     * @param timeout Таймаут ожидания в секундах.
-     * @return Кликабельный элемент.
+     * @param driver  экземпляр WebDriver для управления браузером
+     * @param element веб-элемент, кликабельность которого нужно ожидать
+     * @param timeout время ожидания в секундах
+     * @return кликабельный веб-элемент
+     * @throws TimeoutException если элемент не стал кликабельным в течение заданного времени
      */
     public static WebElement waitForElementClickable(WebDriver driver, WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
@@ -57,12 +57,14 @@ public final class WaitUtils {
     }
 
     /**
-     * Ожидает видимости всех элементов в списке.
+     * Ожидает видимости всех элементов в списке в течение указанного времени.
+     * Все элементы должны стать видимыми для успешного завершения ожидания.
      *
-     * @param driver   Веб-драйвер, используемый для управления браузером.
-     * @param elements Список элементов, которых нужно ожидать.
-     * @param timeout  Таймаут ожидания в секундах.
-     * @return Список видимых элементов.
+     * @param driver   экземпляр WebDriver для управления браузером
+     * @param elements список веб-элементов, видимость которых нужно ожидать
+     * @param timeout  время ожидания в секундах
+     * @return список видимых веб-элементов
+     * @throws TimeoutException если не все элементы стали видимыми в течение заданного времени
      */
     public static List<WebElement> waitForAllElementsVisible(WebDriver driver, List<WebElement> elements, int timeout) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));

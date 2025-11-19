@@ -1,23 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="All Tests Suite" verbose="1">
-    <!-- Chrome -->
-    <test name="Chrome Tests">
+<suite name="Automation Test Suite" verbose="1">
+    <test name="Smoke Tests - Chrome">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="org.example.tests.FormFieldsTest"/>
-            <class name="org.example.tests.ClickEventsTest"/>
-            <class name="org.example.tests.PopupsTest"/>
+            <class name="org.example.tests.formfields.FormFieldsSmokeTest"/>
+            <class name="org.example.tests.clickevents.ClickEventsSmokeTest"/>
+            <class name="org.example.tests.popups.PopupsSmokeTest"/>
+            <class name="org.example.tests.registration.RegistrationSmokeTest"/>
         </classes>
     </test>
 
-    <!-- Firefox -->
-    <test name="Firefox Tests">
+    <test name="Smoke Tests - Firefox">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="org.example.tests.FormFieldsTest"/>
-            <class name="org.example.tests.ClickEventsTest"/>
-            <class name="org.example.tests.PopupsTest"/>
+            <class name="org.example.tests.formfields.FormFieldsSmokeTest"/>
+            <class name="org.example.tests.clickevents.ClickEventsSmokeTest"/>
+            <class name="org.example.tests.popups.PopupsSmokeTest"/>
+            <class name="org.example.tests.registration.RegistrationSmokeTest"/>
+        </classes>
+    </test>
+
+    <test name="Quality Tests - Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="org.example.tests.formfields.FormFieldsQualityTest"/>
+            <class name="org.example.tests.clickevents.ClickEventsQualityTest"/>
+            <class name="org.example.tests.popups.PopupsQualityTest"/>
+            <class name="org.example.tests.registration.RegistrationQualityTest"/>
+        </classes>
+    </test>
+
+    <test name="Quality Tests - Firefox">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="org.example.tests.formfields.FormFieldsQualityTest"/>
+            <class name="org.example.tests.clickevents.ClickEventsQualityTest"/>
+            <class name="org.example.tests.popups.PopupsQualityTest"/>
+            <class name="org.example.tests.registration.RegistrationQualityTest"/>
+        </classes>
+    </test>
+
+    <test name="Regression Tests - Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="org.example.tests.formfields.FormFieldsRegressionTest"/>
+            <class name="org.example.tests.clickevents.ClickEventsRegressionTest"/>
+            <class name="org.example.tests.popups.PopupsRegressionTest"/>
+            <class name="org.example.tests.registration.RegistrationRegressionTest"/>
+        </classes>
+    </test>
+
+    <test name="Regression Tests - Firefox">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="org.example.tests.formfields.FormFieldsRegressionTest"/>
+            <class name="org.example.tests.clickevents.ClickEventsRegressionTest"/>
+            <class name="org.example.tests.popups.PopupsRegressionTest"/>
+            <class name="org.example.tests.registration.RegistrationRegressionTest"/>
         </classes>
     </test>
 </suite>
