@@ -2,6 +2,11 @@ package org.example.config;
 
 import java.util.*;
 
+/**
+ * Класс TaskSolver предоставляет методы для решения различных алгоритмических задач,
+ * включая генерацию перестановок, поиск наибольшей возрастающей подпоследовательности
+ * и поиск наибольшей общей подпоследовательности.
+ */
 public class TaskSolver {
 
     public static List<String> permutations(int[] arr) {

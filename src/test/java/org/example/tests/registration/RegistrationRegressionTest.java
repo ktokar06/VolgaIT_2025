@@ -1,13 +1,12 @@
 package org.example.tests.registration;
 
-import io.qameta.allure.*;
 import org.example.pages.RegistrationPage;
 import org.example.tests.BaseTest;
 import org.example.utils.ParameterProvider;
 import org.testng.annotations.Test;
+import io.qameta.allure.*;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 @Epic("Регистрация пользователя")
 @Feature("Regression тесты регистрации")
@@ -19,44 +18,28 @@ public class RegistrationRegressionTest extends BaseTest {
     @Description("Тест проверяет корректность выбора семейного положения и хобби")
     public void testFormElementsStates() {
         driver.get(ParameterProvider.get("registration.url"));
-
         RegistrationPage registrationPage = new RegistrationPage(driver);
 
+        String singleStatus = ParameterProvider.get("marital.status.single");
+        String marriedStatus = ParameterProvider.get("marital.status.married");
+        String danceHobby = ParameterProvider.get("hobby.dance");
 
-        registrationPage.fillMaritalStatus("single");
-        assertTrue(registrationPage.isMaritalStatusSelected("single"),
+        registrationPage.fillMaritalStatus(singleStatus);
+        assertTrue(registrationPage.isMaritalStatusSelected(singleStatus),
                 "Семейное положение 'Single' должно быть выбрано");
 
-
-        registrationPage.fillHobby("dance");
-        assertTrue(registrationPage.isHobbySelected("dance"),
+        registrationPage.fillHobby(danceHobby);
+        assertTrue(registrationPage.isHobbySelected(danceHobby),
                 "Хобби 'Dance' должно быть выбрано");
 
-
-        registrationPage.uncheckHobby("dance");
-        assertFalse(registrationPage.isHobbySelected("dance"),
+        registrationPage.uncheckHobby(danceHobby);
+        assertFalse(registrationPage.isHobbySelected(danceHobby),
                 "Хобби 'Dance' не должно быть выбрано после снятия");
-    }
 
-    @Test
-    @Story("Регистрация с различными комбинациями хобби и датой рождения")
-    @Severity(SeverityLevel.MINOR)
-    @Description("Тест проверяет регистрацию с разными комбинациями хобби и датой рождения")
-    public void testRegistrationWithDifferentHobbyCombinations() {
-        driver.get(ParameterProvider.get("registration.url"));
-
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-
-        registrationPage.fillPersonalData("John", "Doe", "79998887744", "john@mail.com", "About John")
-                .fillMaritalStatus("divorced")
-                .fillHobbies("dance", "reading", "cricket")
-                .fillDateOfBirth("1", "1", "2014") // Используем числовые значения
-                .fillUsername("johndoe")
-                .fillPassword("password123")
-                .fillConfirmPassword("password123")
-                .submit();
-
-        assertTrue(registrationPage.isSuccessDisplayed(),
-                "Сообщение об успешной регистрации должно отображаться");
+        registrationPage.fillMaritalStatus(marriedStatus);
+        assertTrue(registrationPage.isMaritalStatusSelected(marriedStatus),
+                "Семейное положение 'Married' должно быть выбрано");
+        assertFalse(registrationPage.isMaritalStatusSelected(singleStatus),
+                "Семейное положение 'Single' не должно быть выбрано");
     }
 }

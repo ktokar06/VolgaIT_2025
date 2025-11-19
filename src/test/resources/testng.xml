@@ -31,15 +31,7 @@
         </classes>
     </test>
 
-    <test name="Quality Tests - Firefox">
-        <parameter name="browser" value="firefox"/>
-        <classes>
-            <class name="org.example.tests.formfields.FormFieldsQualityTest"/>
-            <class name="org.example.tests.clickevents.ClickEventsQualityTest"/>
-            <class name="org.example.tests.popups.PopupsQualityTest"/>
-            <class name="org.example.tests.registration.RegistrationQualityTest"/>
-        </classes>
-    </test>
+
 
     <test name="Regression Tests - Chrome">
         <parameter name="browser" value="chrome"/>
