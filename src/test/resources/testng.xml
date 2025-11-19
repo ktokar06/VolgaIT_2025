@@ -31,8 +31,6 @@
         </classes>
     </test>
 
-
-
     <test name="Regression Tests - Chrome">
         <parameter name="browser" value="chrome"/>
         <classes>
