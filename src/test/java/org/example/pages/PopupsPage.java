@@ -7,11 +7,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static org.example.config.TimeoutConfig.*;
+
 /**
  * Класс Page Object для работы со страницей всплывающих окон
  */
 public class PopupsPage extends BasePage {
-
     @FindBy(id = "alert")
     private WebElement alertButton;
 
@@ -30,151 +31,165 @@ public class PopupsPage extends BasePage {
     @FindBy(css = ".tooltip_text")
     private WebElement tooltip;
 
-    @FindBy(xpath = "//div[contains(text(), 'click me to see a tooltip')]")
+    @FindBy(xpath = "//div[contains(@class, 'tooltip_1')]")
     private WebElement tooltipTrigger;
 
+    /**
+     * Конструктор класса PopupsPage.
+     * Инициализирует элементы страницы с помощью PageFactory.
+     *
+     * @param driver экземпляр WebDriver для взаимодействия с браузером
+     */
     public PopupsPage(WebDriver driver) {
         super(driver);
     }
 
     /**
-     * Клик по кнопке вызова алерта
+     * Нажимает кнопку вызова простого алерта.
+     * Ожидает кликабельности кнопки перед выполнением действия.
      *
-     * @return текущий экземпляр PopupsPage
+     * @return текущий экземпляр PopupsPage для цепочки вызовов
      */
     @Step("Клик по кнопке Alert")
     public PopupsPage clickAlertButton() {
-        WaitUtils.waitForElementClickable(driver, alertButton, 10).click();
+        WaitUtils.waitForElementClickable(driver, alertButton, DEFAULT_TIMEOUT).click();
         return this;
     }
 
     /**
-     * Клик по кнопке вызова confirm-диалога
+     * Нажимает кнопку вызова окна подтверждения.
+     * Ожидает кликабельности кнопки перед выполнением действия.
      *
-     * @return текущий экземпляр PopupsPage
+     * @return текущий экземпляр PopupsPage для цепочки вызовов
      */
     @Step("Клик по кнопке Confirm")
     public PopupsPage clickConfirmButton() {
-        WaitUtils.waitForElementClickable(driver, confirmButton, 10).click();
+        WaitUtils.waitForElementClickable(driver, confirmButton, DEFAULT_TIMEOUT).click();
         return this;
     }
 
     /**
-     * Клик по кнопке вызова prompt-диалога
+     * Нажимает кнопку вызова промпта с вводом текста.
+     * Ожидает кликабельности кнопки перед выполнением действия.
      *
-     * @return текущий экземпляр PopupsPage
+     * @return текущий экземпляр PopupsPage для цепочки вызовов
      */
     @Step("Клик по кнопке Prompt")
     public PopupsPage clickPromptButton() {
-        WaitUtils.waitForElementClickable(driver, promptButton, 10).click();
+        WaitUtils.waitForElementClickable(driver, promptButton, DEFAULT_TIMEOUT).click();
         return this;
     }
 
     /**
-     * Клик по элементу-триггеру для отображения тултипа
+     * Нажимает на триггер тултипа для его активации.
+     * Ожидает кликабельности элемента перед выполнением действия.
      *
-     * @return текущий экземпляр PopupsPage
+     * @return текущий экземпляр PopupsPage для цепочки вызовов
      */
     @Step("Клик по тултипу")
     public PopupsPage clickTooltip() {
-        WaitUtils.waitForElementClickable(driver, tooltipTrigger, 10).click();
+        WaitUtils.waitForElementClickable(driver, tooltipTrigger, DEFAULT_TIMEOUT).click();
         return this;
     }
 
     /**
-     * Обработка алерта с возможностью принятия или отклонения
+     * Обрабатывает алерт, принимая или отклоняя его.
+     * Ожидает появления алерта перед взаимодействием.
      *
-     * @param accept true - принять алерт (OK), false - отклонить (Cancel)
-     * @return текущий экземпляр PopupsPage
+     * @param accept true - принять алерт, false - отклонить
+     * @return текущий экземпляр PopupsPage для цепочки вызовов
      */
     @Step("Обработка алерта")
     public PopupsPage handleAlert(boolean accept) {
-        if (WaitUtils.waitForAlertPresence(driver, 5)) {
-            Alert alert = driver.switchTo().alert();
-            switch (String.valueOf(accept)) {
-                case "true":
-                    alert.accept();
-                    break;
-                case "false":
-                    alert.dismiss();
-                    break;
-                default:
-                    throw new IllegalArgumentException("Недопустимое значение accept: " + accept);
-            }
+        Alert alert = WaitUtils.waitForAlertPresent(driver, ALERT_TIMEOUT);
+        if (accept) {
+            alert.accept();
+        } else {
+            alert.dismiss();
         }
         return this;
     }
 
     /**
-     * Обработка prompt-диалога с вводом текста и выбором действия
+     * Обрабатывает промпт, вводя текст и принимая или отклоняя его.
+     * Ожидает появления промпта перед взаимодействием.
      *
-     * @param text   текст для ввода в prompt (может быть null)
-     * @param accept true - принять (OK), false - отклонить (Cancel)
-     * @return текущий экземпляр PopupsPage
+     * @param text текст для ввода в промпт (может быть null или пустым)
+     * @param accept true - принять промпт, false - отклонить
+     * @return текущий экземпляр PopupsPage для цепочки вызовов
      */
     @Step("Обработка промпта с текстом: {text}")
     public PopupsPage handlePrompt(String text, boolean accept) {
-        if (WaitUtils.waitForAlertPresence(driver, 5)) {
-            Alert alert = driver.switchTo().alert();
-            if (text != null) {
-                alert.sendKeys(text);
-            }
+        Alert alert = WaitUtils.waitForAlertPresent(driver, ALERT_TIMEOUT);
+        if (text != null && !text.isEmpty()) {
+            alert.sendKeys(text);
+        }
 
-            switch (String.valueOf(accept)) {
-                case "true":
-                    alert.accept();
-                    break;
-                case "false":
-                    alert.dismiss();
-                    break;
-                default:
-                    throw new IllegalArgumentException("Недопустимое значение accept: " + accept);
-            }
+        if (accept) {
+            alert.accept();
+        } else {
+            alert.dismiss();
         }
         return this;
     }
 
     /**
-     * Получение текста результата confirm-диалога
+     * Получает текст результата подтверждения.
+     * Ожидает видимости элемента результата.
      *
      * @return текст результата подтверждения
      */
     @Step("Получение результата подтверждения")
     public String getConfirmResult() {
-        return WaitUtils.waitForElementVisible(driver, confirmResult, 5).getText();
+        return WaitUtils.waitForElementVisible(driver, confirmResult, SHORT_TIMEOUT).getText();
     }
 
     /**
-     * Получение текста результата prompt-диалога
+     * Получает текст результата промпта.
+     * Ожидает видимости элемента результата.
      *
      * @return текст результата промпта
      */
     @Step("Получение результата промпта")
     public String getPromptResult() {
-        return WaitUtils.waitForElementVisible(driver, promptResult, 5).getText();
+        return WaitUtils.waitForElementVisible(driver, promptResult, SHORT_TIMEOUT).getText();
     }
 
     /**
-     * Получение текста тултипа
+     * Получает текст тултипа.
+     * Ожидает видимости элемента тултипа.
      *
      * @return текст тултипа
      */
     @Step("Получение текста тултипа")
     public String getTooltipText() {
-        return WaitUtils.waitForElementVisible(driver, tooltip, 5).getText();
+        return WaitUtils.waitForElementVisible(driver, tooltip, SHORT_TIMEOUT).getText();
     }
 
     /**
-     * Проверка видимости тултипа на странице
+     * Проверяет видимость тултипа на странице.
+     * В случае исключения возвращает false.
      *
-     * @return true если тултип видим, false если не видим или возникла ошибка
+     * @return true если тултип видим, иначе false
      */
     @Step("Проверка видимости тултипа")
     public boolean isTooltipVisible() {
         try {
-            return WaitUtils.waitForElementVisible(driver, tooltip, 5).isDisplayed();
+            return WaitUtils.waitForElementVisible(driver, tooltip, SHORT_TIMEOUT).isDisplayed();
         } catch (Exception e) {
             return false;
         }
+    }
+
+    /**
+     * Проверяет, содержит ли результат промпта ожидаемый текст.
+     *
+     * @param expectedText ожидаемый текст для поиска
+     * @return true если результат промпта содержит ожидаемый текст, иначе false
+     */
+    @Step("Проверка, что результат промпта содержит текст: {expectedText}")
+    public boolean isPromptResultContains(String expectedText) {
+        String actualText = getPromptResult();
+        return actualText.contains(expectedText);
     }
 }
